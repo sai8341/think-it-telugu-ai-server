@@ -1,0 +1,6 @@
+# Git Ignore
+vps-backend/app/rag_database.db
+vps-backend/__pycache__/
+__pycache__/
+.env
+*.tar.gz
