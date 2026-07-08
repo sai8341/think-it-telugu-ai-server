@@ -37,17 +37,17 @@ sudo apt-get install -y nginx certbot python3-certbot-nginx
 echo "[4/6] Configuring Nginx reverse proxy..."
 NGINX_CONF="/etc/nginx/sites-available/ai.thinkittelugu.in"
 
-sudo bash -c "cat > \$NGINX_CONF" << 'EOF'
+cat << 'EOF' | sudo tee $NGINX_CONF > /dev/null
 server {
     listen 80;
     server_name ai.thinkittelugu.in;
 
     location / {
         proxy_pass http://127.0.0.1:8000;
-        proxy_set_header Host \$host;
-        proxy_set_header X-Real-IP \$remote_addr;
-        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto \$scheme;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
 
         # Disable buffering to support Server-Sent Events (SSE) streaming correctly
         proxy_http_version 1.1;
@@ -62,7 +62,7 @@ EOF
 
 # Enable the configuration
 if [ ! -f /etc/nginx/sites-enabled/ai.thinkittelugu.in ]; then
-    sudo ln -s \$NGINX_CONF /etc/nginx/sites-enabled/
+    sudo ln -s $NGINX_CONF /etc/nginx/sites-enabled/
 fi
 
 # Remove default site if it exists to avoid conflicts
