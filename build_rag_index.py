@@ -4,7 +4,7 @@ import sys
 import argparse
 import requests
 
-DEFAULT_API_HOST = "https://ai.thinkittelugu.in"
+DEFAULT_API_HOST = "https://qwen.thinkittelugu.in"
 SECRET_KEY = "thinkittelugu-secure-rag-key-2026"
 
 def clean_markdown(text: str) -> str:
